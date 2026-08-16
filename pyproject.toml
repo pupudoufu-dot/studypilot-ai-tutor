@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "studypilot-ai-tutor"
+version = "0.1.0"
+description = "A reproducible prototype for misconception diagnosis and scaffolded AI tutoring."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Bingyan Liu" }]
+
+[project.scripts]
+studypilot = "studypilot.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
