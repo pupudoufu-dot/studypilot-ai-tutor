@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="StudyPilot：从错因诊断到分级提示与迁移验证的教育 AI 产品原型。"
+    />
+    <title>StudyPilot · 错因诊断与分级辅导</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <nav class="nav" aria-label="主导航">
+          <a class="brand" href="#top" aria-label="StudyPilot 首页">
+            <span class="brand-mark">S</span>
+            <span>StudyPilot</span>
+          </a>
+          <div class="nav-links">
+            <a href="#demo">在线演示</a>
+            <a href="#workflow">工作流</a>
+            <a href="#evaluation">离线评测</a>
+          </div>
+        </nav>
+
+        <div class="hero-grid" id="top">
+          <section class="hero-copy">
+            <p class="eyebrow"><span></span> Misconception-first tutoring</p>
+            <h1>不急着给答案，<br /><em>先找到为什么错。</em></h1>
+            <p class="hero-description">
+              StudyPilot 将 AI 辅导拆为错因诊断、分级提示与迁移练习，用置信度和提示预算控制每一次干预。
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#demo">体验诊断</a>
+              <a class="button secondary" href="#evaluation">查看证据</a>
+            </div>
+            <ul class="principles" aria-label="产品原则">
+              <li><strong>5</strong><span>类错因</span></li>
+              <li><strong>3</strong><span>级提示</span></li>
+              <li><strong>0</strong><span>API Key</span></li>
+            </ul>
+          </section>
+
+          <aside class="hero-card" aria-label="工作流预览">
+            <div class="card-topline">
+              <span>SESSION / 024</span>
+              <span class="status"><i></i> ACTIVE</span>
+            </div>
+            <div class="mini-question">
+              <span>学生表达</span>
+              <p>“我把移项理解成两边都加 3，概念有点混淆。”</p>
+            </div>
+            <div class="diagnosis-preview">
+              <div>
+                <span class="preview-label">DIAGNOSIS</span>
+                <strong>概念理解偏差</strong>
+              </div>
+              <div class="confidence-ring"><span>72%</span></div>
+            </div>
+            <div class="route-preview">
+              <span class="route-node done">Diagnosis</span>
+              <span class="route-line"></span>
+              <span class="route-node active">Tutor</span>
+              <span class="route-line muted"></span>
+              <span class="route-node">Planner</span>
+            </div>
+            <div class="hint-preview">
+              <span>提示 1 / 3</span>
+              <p>先回想移项对应的等式性质：为了保持等式成立，两边应该做什么操作？</p>
+            </div>
+          </aside>
+        </div>
+      </header>
+
+      <main>
+        <section class="demo-section" id="demo">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow dark"><span></span> Interactive prototype</p>
+              <h2>走一遍真实的产品路径</h2>
+            </div>
+            <p>选择样例或输入你自己的场景。当前 Demo 使用可解释规则，在本地浏览器中完成判断。</p>
+          </div>
+
+          <div class="sample-row" role="group" aria-label="示例场景">
+            <button class="sample-chip active" type="button" data-sample="concept">概念混淆</button>
+            <button class="sample-chip" type="button" data-sample="misread">审题偏差</button>
+            <button class="sample-chip" type="button" data-sample="calculation">计算失误</button>
+            <button class="sample-chip" type="button" data-sample="method">方法选错</button>
+            <button class="sample-chip" type="button" data-sample="unclear">证据不足</button>
+          </div>
+
+          <div class="demo-grid">
+            <form class="input-panel" id="diagnosis-form">
+              <div class="panel-heading">
+                <span class="step-number">01</span>
+                <div>
+                  <p>输入场景</p>
+                  <span>Question & reasoning</span>
+                </div>
+              </div>
+
+              <label>
+                <span>题目</span>
+                <textarea id="question" rows="3" required></textarea>
+              </label>
+              <label>
+                <span>学生答案</span>
+                <input id="answer" type="text" required />
+              </label>
+              <label>
+                <span>学生的思考过程</span>
+                <textarea id="reasoning" rows="4" required></textarea>
+                <small>诊断依赖过程信息，而不是只看最终答案。</small>
+              </label>
+              <button class="button primary wide" type="submit">
+                <span>开始诊断</span><span aria-hidden="true">→</span>
+              </button>
+            </form>
+
+            <section class="result-panel" aria-live="polite">
+              <div class="panel-heading">
+                <span class="step-number coral">02</span>
+                <div>
+                  <p>诊断结果</p>
+                  <span>Diagnosis & routing</span>
+                </div>
+                <span class="result-status" id="result-status">待诊断</span>
+              </div>
+
+              <div class="empty-state" id="empty-state">
+                <div class="radar" aria-hidden="true"><i></i></div>
+                <h3>等待诊断输入</h3>
+                <p>系统将返回错因、置信度、证据和下一步路由。</p>
+              </div>
+
+              <div class="result-content hidden" id="result-content">
+                <div class="diagnosis-block">
+                  <div>
+                    <span class="field-label">可能错因</span>
+                    <h3 id="diagnosis-label">—</h3>
+                    <div class="evidence-list" id="evidence-list"></div>
+                  </div>
+                  <div class="score-box">
+                    <span>置信度</span>
+                    <strong id="confidence-value">—</strong>
+                    <div class="score-track"><i id="confidence-bar"></i></div>
+                  </div>
+                </div>
+
+                <div class="route-block">
+                  <div class="field-label-row">
+                    <span class="field-label">工作流路由</span>
+                    <span id="route-label">—</span>
+                  </div>
+                  <div class="route-timeline" id="route-timeline">
+                    <div class="timeline-step" data-step="diagnosis"><i>1</i><span>Diagnosis</span></div>
+                    <b></b>
+                    <div class="timeline-step" data-step="tutor"><i>2</i><span>Tutor</span></div>
+                    <b></b>
+                    <div class="timeline-step" data-step="planner"><i>3</i><span>Planner</span></div>
+                  </div>
+                </div>
+
+                <div class="action-card" id="action-card">
+                  <div class="action-meta">
+                    <span id="action-kind">分级提示</span>
+                    <span id="budget-label">Hint Budget · 3</span>
+                  </div>
+                  <p id="action-message">—</p>
+                </div>
+
+                <div class="result-actions" id="result-actions">
+                  <button class="button secondary compact" id="retry-button" type="button">仍未解决，下一条提示</button>
+                  <button class="button dark compact" id="success-button" type="button">我已独立完成</button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="workflow-section" id="workflow">
+          <div class="section-heading light">
+            <div>
+              <p class="eyebrow"><span></span> Controlled workflow</p>
+              <h2>把 AI 的不确定性，变成可设计的路径</h2>
+            </div>
+            <p>每个 Agent 只负责一个清晰决策，关键节点有阈值、预算和回退规则。</p>
+          </div>
+
+          <div class="workflow-cards">
+            <article>
+              <span class="card-index">01</span>
+              <div class="workflow-icon">D</div>
+              <h3>Diagnosis</h3>
+              <p>从作答过程提取错因证据，输出类别与置信度；低于阈值时先追问。</p>
+              <ul><li>5 类错因</li><li>证据可解释</li><li>低置信 Fallback</li></ul>
+            </article>
+            <article class="featured">
+              <span class="card-index">02</span>
+              <div class="workflow-icon">T</div>
+              <h3>Tutor</h3>
+              <p>根据错因提供渐进提示，保留学生的解题主动权，并限制干预次数。</p>
+              <ul><li>三级提示</li><li>不直接泄题</li><li>Hint Budget</li></ul>
+            </article>
+            <article>
+              <span class="card-index">03</span>
+              <div class="workflow-icon">P</div>
+              <h3>Planner</h3>
+              <p>学生重试成功后生成同知识点变式任务，验证方法能否迁移。</p>
+              <ul><li>同知识点</li><li>改变题面</li><li>强调方法复用</li></ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="evaluation-section" id="evaluation">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow dark"><span></span> Reproducible evidence</p>
+              <h2>能复跑的结果，比好听的数字重要</h2>
+            </div>
+            <p>200 条合成场景用于回归测试产品规则。所有结果均可通过仓库脚本重新生成。</p>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card main-metric">
+              <span>错因识别准确率</span>
+              <div class="metric-change"><strong>60%</strong><i>→</i><strong>90%</strong></div>
+              <div class="compare-bars">
+                <div><span>Baseline</span><b><i style="width: 60%"></i></b><em>120 / 200</em></div>
+                <div><span>StudyPilot</span><b><i style="width: 90%"></i></b><em>180 / 200</em></div>
+              </div>
+            </article>
+            <article class="metric-card">
+              <span>低置信硬判断率</span>
+              <div class="metric-change small"><strong>100%</strong><i>→</i><strong>0%</strong></div>
+              <p>20 条无充分证据场景全部进入追问路由。</p>
+            </article>
+            <article class="metric-card">
+              <span>首轮答案暴露率</span>
+              <div class="metric-change small"><strong>100%</strong><i>→</i><strong>0%</strong></div>
+              <p>200 条首轮提示均未返回预置正确答案。</p>
+            </article>
+          </div>
+
+          <div class="evidence-note">
+            <strong>证据边界</strong>
+            <p>这是离线合成评测，用于验证工作流行为，不证明真实学生学习效果、留存率或商业转化。内部基线也不是外部产品对比。</p>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <a class="brand" href="#top"><span class="brand-mark">S</span><span>StudyPilot</span></a>
+        <p>Product definition, workflow & evaluation by Bingyan Liu · MIT License</p>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

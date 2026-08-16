@@ -1,0 +1,174 @@
+{
+  "dataset": {
+    "cases": 200,
+    "knowledge_points": 40,
+    "error_types": 5,
+    "source": "synthetic"
+  },
+  "diagnosis_accuracy": {
+    "baseline_count": 120,
+    "baseline_percent": 60.0,
+    "optimized_count": 180,
+    "optimized_percent": 90.0
+  },
+  "low_confidence_hard_decision_rate": {
+    "cases": 20,
+    "baseline_count": 20,
+    "baseline_percent": 100.0,
+    "optimized_count": 0,
+    "optimized_percent": 0.0
+  },
+  "first_turn_answer_exposure_rate": {
+    "baseline_count": 200,
+    "baseline_percent": 100.0,
+    "optimized_count": 0,
+    "optimized_percent": 0.0
+  },
+  "bad_cases": [
+    {
+      "case_id": "case-004",
+      "expected": "method_selection",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我知道几个公式，但不知道这题该选哪个。"
+    },
+    {
+      "case_id": "case-018",
+      "expected": "calculation_error",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "步骤看起来都对，但答案就是不一样。"
+    },
+    {
+      "case_id": "case-032",
+      "expected": "misread_question",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我按印象做的，没有重新读题。"
+    },
+    {
+      "case_id": "case-040",
+      "expected": "procedure_gap",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我能跟着例题做，换一道就接不上。"
+    },
+    {
+      "case_id": "case-046",
+      "expected": "concept_gap",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我只是凭感觉选的，说不清原因。"
+    },
+    {
+      "case_id": "case-054",
+      "expected": "method_selection",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我知道几个公式，但不知道这题该选哪个。"
+    },
+    {
+      "case_id": "case-068",
+      "expected": "calculation_error",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "步骤看起来都对，但答案就是不一样。"
+    },
+    {
+      "case_id": "case-082",
+      "expected": "misread_question",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我按印象做的，没有重新读题。"
+    },
+    {
+      "case_id": "case-090",
+      "expected": "procedure_gap",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我能跟着例题做，换一道就接不上。"
+    },
+    {
+      "case_id": "case-096",
+      "expected": "concept_gap",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我只是凭感觉选的，说不清原因。"
+    },
+    {
+      "case_id": "case-104",
+      "expected": "method_selection",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我知道几个公式，但不知道这题该选哪个。"
+    },
+    {
+      "case_id": "case-118",
+      "expected": "calculation_error",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "步骤看起来都对，但答案就是不一样。"
+    },
+    {
+      "case_id": "case-132",
+      "expected": "misread_question",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我按印象做的，没有重新读题。"
+    },
+    {
+      "case_id": "case-140",
+      "expected": "procedure_gap",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我能跟着例题做，换一道就接不上。"
+    },
+    {
+      "case_id": "case-146",
+      "expected": "concept_gap",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我只是凭感觉选的，说不清原因。"
+    },
+    {
+      "case_id": "case-154",
+      "expected": "method_selection",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我知道几个公式，但不知道这题该选哪个。"
+    },
+    {
+      "case_id": "case-168",
+      "expected": "calculation_error",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "步骤看起来都对，但答案就是不一样。"
+    },
+    {
+      "case_id": "case-182",
+      "expected": "misread_question",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我按印象做的，没有重新读题。"
+    },
+    {
+      "case_id": "case-190",
+      "expected": "procedure_gap",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我能跟着例题做，换一道就接不上。"
+    },
+    {
+      "case_id": "case-196",
+      "expected": "concept_gap",
+      "predicted": "needs_clarification",
+      "confidence": 0.35,
+      "reasoning": "我只是凭感觉选的，说不清原因。"
+    }
+  ],
+  "limitations": [
+    "Synthetic benchmark; it does not measure real learner outcomes.",
+    "Rule-based classifier; results do not represent general LLM quality.",
+    "Baseline is a documented comparator, not a third-party product."
+  ]
+}
