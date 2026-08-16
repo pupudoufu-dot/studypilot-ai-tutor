@@ -2,11 +2,14 @@
 
 ## Scope
 
-The public benchmark contains 200 synthetic cases:
+The public benchmark contains 210 synthetic cases:
 
 - 40 mathematics knowledge points;
 - 5 predefined error types;
 - one case for each knowledge-point/error-type pair.
+- 10 independent challenge cases with negation, conflicting evidence, and
+  insufficient evidence. These are labeled `challenge_synthetic` and include
+  `needs_clarification` when a hard diagnosis would be unjustified.
 
 Run:
 
@@ -34,8 +37,10 @@ and uses progressive hints that do not reveal the stored answer.
 
 `correct predicted error type / all benchmark cases`
 
-Cases routed to `needs_clarification` count as incorrect for label accuracy,
-even though clarification may be safer as a product decision.
+Cases with a concrete expected error type count `needs_clarification` as
+incorrect. Challenge cases explicitly labeled `needs_clarification` count a
+clarification route as correct. Results are also broken down by source so the
+challenge set cannot be hidden by template-generated coverage.
 
 ### Hard-decision rate on low-confidence cases
 

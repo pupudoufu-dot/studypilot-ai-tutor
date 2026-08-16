@@ -1,15 +1,31 @@
 {
   "dataset": {
-    "cases": 200,
+    "cases": 210,
     "knowledge_points": 40,
-    "error_types": 5,
+    "error_types": 6,
     "source": "synthetic"
   },
   "diagnosis_accuracy": {
-    "baseline_count": 120,
-    "baseline_percent": 60.0,
-    "optimized_count": 180,
-    "optimized_percent": 90.0
+    "baseline_count": 124,
+    "baseline_percent": 59.0,
+    "optimized_count": 194,
+    "optimized_percent": 92.4
+  },
+  "by_source": {
+    "challenge_synthetic": {
+      "cases": 10,
+      "baseline_count": 4,
+      "baseline_percent": 40.0,
+      "optimized_count": 10,
+      "optimized_percent": 100.0
+    },
+    "synthetic": {
+      "cases": 200,
+      "baseline_count": 120,
+      "baseline_percent": 60.0,
+      "optimized_count": 184,
+      "optimized_percent": 92.0
+    }
   },
   "low_confidence_hard_decision_rate": {
     "cases": 20,
@@ -19,7 +35,7 @@
     "optimized_percent": 0.0
   },
   "first_turn_answer_exposure_rate": {
-    "baseline_count": 200,
+    "baseline_count": 210,
     "baseline_percent": 100.0,
     "optimized_count": 0,
     "optimized_percent": 0.0
@@ -38,13 +54,6 @@
       "predicted": "needs_clarification",
       "confidence": 0.35,
       "reasoning": "步骤看起来都对，但答案就是不一样。"
-    },
-    {
-      "case_id": "case-032",
-      "expected": "misread_question",
-      "predicted": "needs_clarification",
-      "confidence": 0.35,
-      "reasoning": "我按印象做的，没有重新读题。"
     },
     {
       "case_id": "case-040",
@@ -75,13 +84,6 @@
       "reasoning": "步骤看起来都对，但答案就是不一样。"
     },
     {
-      "case_id": "case-082",
-      "expected": "misread_question",
-      "predicted": "needs_clarification",
-      "confidence": 0.35,
-      "reasoning": "我按印象做的，没有重新读题。"
-    },
-    {
       "case_id": "case-090",
       "expected": "procedure_gap",
       "predicted": "needs_clarification",
@@ -110,13 +112,6 @@
       "reasoning": "步骤看起来都对，但答案就是不一样。"
     },
     {
-      "case_id": "case-132",
-      "expected": "misread_question",
-      "predicted": "needs_clarification",
-      "confidence": 0.35,
-      "reasoning": "我按印象做的，没有重新读题。"
-    },
-    {
       "case_id": "case-140",
       "expected": "procedure_gap",
       "predicted": "needs_clarification",
@@ -143,13 +138,6 @@
       "predicted": "needs_clarification",
       "confidence": 0.35,
       "reasoning": "步骤看起来都对，但答案就是不一样。"
-    },
-    {
-      "case_id": "case-182",
-      "expected": "misread_question",
-      "predicted": "needs_clarification",
-      "confidence": 0.35,
-      "reasoning": "我按印象做的，没有重新读题。"
     },
     {
       "case_id": "case-190",

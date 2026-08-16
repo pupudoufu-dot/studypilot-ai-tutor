@@ -101,7 +101,36 @@ def build_cases() -> list[dict[str, object]]:
                     "source": "synthetic",
                 }
             )
-    return cases
+    return cases + build_challenge_cases()
+
+
+def build_challenge_cases() -> list[dict[str, object]]:
+    """Return plausible cases that are intentionally independent of templates."""
+    scenarios = [
+        ("challenge-001", "\u4e00\u5143\u4e00\u6b21\u65b9\u7a0b", "\u6211\u4e0d\u662f\u770b\u9519\u9898\uff0c\u662f\u628a\u79fb\u9879\u7684\u7b26\u53f7\u5199\u53cd\u4e86\u3002", "calculation_error"),
+        ("challenge-002", "\u5206\u6570\u52a0\u6cd5", "\u6211\u4e0d\u662f\u516c\u5f0f\u9009\u9519\uff0c\u901a\u5206\u65f6\u5206\u6bcd\u7b97\u9519\u4e86\u3002", "calculation_error"),
+        ("challenge-003", "\u4e8c\u6b21\u51fd\u6570", "\u6211\u4e0d\u662f\u8ba1\u7b97\u9519\uff0c\u800c\u662f\u516c\u5f0f\u9009\u9519\u4e86\u3002", "method_selection"),
+        ("challenge-004", "\u4e0d\u7b49\u5f0f", "\u6211\u6309\u5370\u8c61\u505a\uff0c\u6ca1\u91cd\u65b0\u8bfb\u9898\uff0c\u628a\u81f3\u5c11\u5f53\u6210\u81f3\u591a\u3002", "misread_question"),
+        ("challenge-005", "\u5145\u5206\u5fc5\u8981\u6761\u4ef6", "\u6211\u4e0d\u662f\u6f0f\u770b\u6761\u4ef6\uff0c\u800c\u662f\u4e0d\u7406\u89e3\u5b9a\u4e49\u91cc\u7684\u9650\u5236\u6761\u4ef6\u3002", "concept_gap"),
+        ("challenge-006", "\u56e0\u5f0f\u5206\u89e3", "\u6211\u4e0d\u662f\u516c\u5f0f\u9009\u9519\uff0c\u662f\u5316\u7b80\u540e\u4e0d\u77e5\u9053\u4e0b\u4e00\u6b65\u600e\u4e48\u505a\u3002", "procedure_gap"),
+        ("challenge-007", "\u6bd4\u4f8b", "\u6211\u89c9\u5f97\u7b54\u6848\u4e0d\u5bf9\uff0c\u4f46\u8bf4\u4e0d\u51fa\u54ea\u4e00\u6b65\u6709\u95ee\u9898\u3002", "needs_clarification"),
+        ("challenge-008", "\u5c0f\u6570\u9664\u6cd5", "\u6211\u53ef\u80fd\u770b\u9519\u9898\uff0c\u4e5f\u53ef\u80fd\u7b97\u9519\u4e86\u3002", "needs_clarification"),
+        ("challenge-009", "\u5e73\u5747\u6570", "\u65b9\u6cd5\u548c\u8ba1\u7b97\u597d\u50cf\u90fd\u6709\u95ee\u9898\uff0c\u4f46\u6211\u8bb0\u4e0d\u6e05\u4e86\u3002", "needs_clarification"),
+        ("challenge-010", "\u4e09\u89d2\u51fd\u6570", "\u8001\u5e08\u8bf4\u6211\u9519\u4e86\uff0c\u4f46\u6211\u4e0d\u77e5\u9053\u539f\u56e0\u3002", "needs_clarification"),
+    ]
+    return [
+        {
+            "case_id": case_id,
+            "knowledge_point": knowledge_point,
+            "question": f"\u5b8c\u6210\u4e00\u9053\u5173\u4e8e{knowledge_point}\u7684\u7ec3\u4e60\uff0c\u5e76\u5199\u51fa\u5173\u952e\u6b65\u9aa4\u3002",
+            "student_answer": "\u793a\u4f8b\u9519\u8bef\u7b54\u6848",
+            "student_reasoning": reasoning,
+            "expected_error_type": expected_error_type,
+            "correct_answer": "\u6807\u51c6\u7b54\u6848\u4ec5\u7528\u4e8e\u8bc4\u6d4b\u7b54\u6848\u66b4\u9732\uff0c\u4e0d\u7528\u4e8e\u8bca\u65ad\u5206\u7c7b\u3002",
+            "source": "challenge_synthetic",
+        }
+        for case_id, knowledge_point, reasoning, expected_error_type in scenarios
+    ]
 
 
 def main() -> None:

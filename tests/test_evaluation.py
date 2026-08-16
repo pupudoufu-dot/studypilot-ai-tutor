@@ -15,9 +15,12 @@ from run_eval import evaluate  # noqa: E402
 class EvaluationTests(unittest.TestCase):
     def test_dataset_has_expected_coverage(self) -> None:
         cases = build_cases()
-        self.assertEqual(len(cases), 200)
+        self.assertEqual(len(cases), 210)
         self.assertEqual(len({case["knowledge_point"] for case in cases}), 40)
-        self.assertEqual(len({case["expected_error_type"] for case in cases}), 5)
+        self.assertEqual(len({case["expected_error_type"] for case in cases}), 6)
+        self.assertEqual(
+            len([case for case in cases if case["source"] == "challenge_synthetic"]), 10
+        )
 
     def test_optimized_policy_improves_reproducible_metrics(self) -> None:
         metrics = evaluate(build_cases())
@@ -29,6 +32,9 @@ class EvaluationTests(unittest.TestCase):
             hard_decisions["optimized_percent"], hard_decisions["baseline_percent"]
         )
         self.assertLess(exposure["optimized_percent"], exposure["baseline_percent"])
+        self.assertEqual(
+            metrics["by_source"]["challenge_synthetic"]["optimized_count"], 10
+        )
 
 
 if __name__ == "__main__":

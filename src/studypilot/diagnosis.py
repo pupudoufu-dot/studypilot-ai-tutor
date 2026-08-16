@@ -53,6 +53,9 @@ PATTERN_RULES: dict[ErrorType, tuple[str, ...]] = {
     ErrorType.PROCEDURE_GAP: (r"会做到.+但",),
 }
 
+OPTIMIZED_RULES[ErrorType.MISREAD_QUESTION] += ("\u6309\u5370\u8c61\u505a", "\u6ca1\u91cd\u65b0\u8bfb\u9898")
+NEGATION_MARKERS = ("\u4e0d\u662f", "\u5e76\u975e", "\u6ca1\u6709")
+
 
 class DiagnosisAgent:
     def __init__(self, confidence_threshold: float = 0.6) -> None:
@@ -65,8 +68,11 @@ class DiagnosisAgent:
 
         for error_type, keywords in rules.items():
             for keyword in keywords:
-                if keyword in text:
-                    scores[error_type].append(keyword)
+                start = 0
+                while (match_index := text.find(keyword, start)) != -1:
+                    if not self._is_negated(text, match_index):
+                        scores[error_type].append(keyword)
+                    start = match_index + len(keyword)
 
         if mode == "optimized":
             for error_type, patterns in PATTERN_RULES.items():
@@ -108,6 +114,12 @@ class DiagnosisAgent:
             evidence=tuple(evidence),
             rationale=f"Matched {len(evidence)} evidence signal(s).",
         )
+
+    @staticmethod
+    def _is_negated(text: str, match_index: int) -> bool:
+        """Do not treat an explicitly rejected cause as positive evidence."""
+        preceding_text = text[max(0, match_index - 4) : match_index]
+        return any(marker in preceding_text for marker in NEGATION_MARKERS)
 
     @staticmethod
     def clarification_question() -> str:
